@@ -7,6 +7,8 @@ import android.os.Bundle;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,22 +24,24 @@ public class MainActivity extends AppCompatActivity {
         //Firebase.set
         // Write a message to the database
         //DB
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference();
 
         Person person = new Person();
         //dding values
         person.setName("tzion");
         person.setAddress("hadad");
 
+        ArrayList childs = new ArrayList<String>();
+        childs.add("users");
+        childs.add("15");
         //Storing values to firebase
-        //myRef.child("Person").setValue(person);
-        myRef.child("users").child("12").setValue(person);
+        DbProvider.getInstance().write(childs, person);
+        DbProvider.getInstance().read();
+
+        childs = new ArrayList<String>();
+        childs.add("users");
+        childs.add("16");
+        //Storing values to firebase
+        DbProvider.getInstance().write(childs, person);
 
     }
-
-
-
-
-
 }
