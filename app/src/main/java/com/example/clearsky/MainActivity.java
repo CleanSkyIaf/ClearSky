@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         insertButton=(Button)findViewById(R.id.newreport) ;
         infoButton=(Button)findViewById(R.id.watchreport) ;
 
@@ -45,7 +46,12 @@ public class MainActivity extends AppCompatActivity {
              //   EditText editText = (EditText) findViewById(R.id.editText);
                // String message = editText.getText().toString();
            //     intent.putExtra(EXTRA_MESSAGE, message);
+                ArrayList<String> a = new ArrayList<String>();
+                a.add("a");
+                Integer b = 3;
+                DbProvider.write(a, b);
                 startActivity(intent);
+
             }
         });
 
@@ -68,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
 //        ArrayList childs = new ArrayList<String>();
 //        childs.add("users");
 //        childs.add("15");
+
 //        //Storing values to firebase
 //        DbProvider.getInstance().write(childs, person);
 //   //     DbProvider.getInstance().read();

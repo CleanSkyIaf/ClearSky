@@ -101,18 +101,6 @@
             android:layout_alignLeft="@+id/dateText"
             android:layout_alignStart="@+id/dateText" />
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:layout_marginRight="39dp"
-            android:layout_marginEnd="39dp"
-            android:id="@+id/birdTypeText"
-            android:layout_alignTop="@+id/birdType"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
-
         <Button
             android:text="send report"
             android:layout_width="wrap_content"
@@ -123,5 +111,15 @@
             android:layout_marginRight="30dp"
             android:layout_marginEnd="30dp"
             android:id="@+id/sendReport"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/birdTypeText"
+            android:layout_alignTop="@+id/birdType"
+            android:layout_toRightOf="@+id/amount"
+            android:layout_toEndOf="@+id/amount" />
     </RelativeLayout>
 </LinearLayout>
