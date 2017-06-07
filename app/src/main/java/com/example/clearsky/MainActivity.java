@@ -3,12 +3,14 @@ package com.example.clearsky;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
@@ -38,13 +40,12 @@ public class MainActivity extends AppCompatActivity {
         insertButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                ReportData reportData = new ReportData();
-                reportData.addReport();
-//                AlertDialog.Builder hiB = new AlertDialog.Builder(context);
-//                hiB.setTitle("tommmmmmmmmmmmm");
-//                hiB.setMessage("go to sleep");
-//                hiB.create().show();
-//                hi.show();
+            //    ReportDataActivity reportDataActivity = new ReportDataActivity();
+                Intent intent = new Intent(MainActivity.this, ReportDataActivity.class);
+             //   EditText editText = (EditText) findViewById(R.id.editText);
+               // String message = editText.getText().toString();
+           //     intent.putExtra(EXTRA_MESSAGE, message);
+                startActivity(intent);
             }
         });
 
@@ -69,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         childs.add("15");
         //Storing values to firebase
         DbProvider.getInstance().write(childs, person);
-     //   DbProvider.getInstance().read();
+        DbProvider.getInstance().read();
 
         childs = new ArrayList<String>();
         childs.add("users");

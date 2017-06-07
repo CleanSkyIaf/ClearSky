@@ -20,7 +20,8 @@
         android:layout_toRightOf="@+id/watchreport"
         android:layout_toEndOf="@+id/watchreport"
         android:layout_marginLeft="22dp"
-        android:layout_marginStart="22dp" />
+        android:layout_marginStart="22dp"/>
+        <!--//android:onClick=""-->
 
     <Button
         android:text="watch report"

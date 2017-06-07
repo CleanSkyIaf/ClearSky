@@ -10,8 +10,6 @@ import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 
 import static android.content.ContentValues.TAG;
@@ -44,21 +42,25 @@ public class DbProvider {
         currRef.setValue(obj);
     }
 
-    public void readAllReports(final ArrayList<Report> reportsList) {
+    public void read() {
         // Read from the database
-
-        final ArrayList<Person> ReportsList = new ArrayList<>();
-
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
+                Person personsObject = dataSnapshot.child("users").child("12").getValue(Person.class);
 
-                for (DataSnapshot postSnapshot: dataSnapshot.child("users").getChildren()) {
-                    reportsList.add(postSnapshot.getValue(Report.class));
-                }
+//                GenericTypeIndicator<List<Person>> t = new GenericTypeIndicator<List<Person>>() {};
+//                Object personsObj = dataSnapshot.child("users").getValue(t);
+//                List<Person> persons = dataSnapshot.child("users").getValue(t);
+             //   Person [] persons = dataSnapshot.child("users").getValue(Person.class);
+//                for(Person person : persons ) {
+//                    Log.d(TAG, "Value is: " + person.getName());
+//                }
+
             }
 
 
