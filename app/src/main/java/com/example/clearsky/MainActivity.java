@@ -43,13 +43,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view){
             //    ReportDataActivity reportDataActivity = new ReportDataActivity();
                 Intent intent = new Intent(MainActivity.this, ReportDataActivity.class);
-             //   EditText editText = (EditText) findViewById(R.id.editText);
-               // String message = editText.getText().toString();
-           //     intent.putExtra(EXTRA_MESSAGE, message);
-                ArrayList<String> a = new ArrayList<String>();
-                a.add("a");
-                Integer b = 3;
-                DbProvider.write(a, b);
                 startActivity(intent);
 
             }
@@ -58,8 +51,12 @@ public class MainActivity extends AppCompatActivity {
         infoButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Info info = new Info();
-                info.showInfo();
+
+                Intent myIntent = null;
+                myIntent = new Intent(MainActivity.this,ReportsView.class);
+                MainActivity.this.startActivity(myIntent);
+//                Info info = new Info();
+//                info.showInfo();
             }
         });
         //Firebase.set
