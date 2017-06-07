@@ -9,8 +9,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
+import java.security.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -34,20 +36,17 @@ public class DbProvider {
         return dbProvider;
     }
 
-    public void write(ArrayList<String> childs, Object obj){
+    public static void write(ArrayList<String> childs, Object obj){
         DatabaseReference currRef = database.getReference();
-
+        //currRef.setValue("reports");
         for (String child : childs) {
-            currRef = currRef.child(child);
+            currRef = currRef.child(child).push();
         }
-
         currRef.setValue(obj);
     }
 
-    public void readAllReports(final ArrayList<Report> persons) {
+    public void readAllReports(final ArrayList<String> reports, final ArrayAdapter<String> arrayAdapterReports) {
         // Read from the database
-
-        final ArrayList<Person> ReportsList = new ArrayList<>();
 
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
 
@@ -56,10 +55,23 @@ public class DbProvider {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
 
-                List<Person> personList = new ArrayList<>();
-                for (DataSnapshot postSnapshot: dataSnapshot.child("users").getChildren()) {
-                    personList.add(postSnapshot.getValue(Person.class));
+                ArrayList<Report> tempReports = new ArrayList<>();
+
+                for (DataSnapshot postSnapshot: dataSnapshot.child("reports").getChildren()) {
+                    tempReports.add(postSnapshot.getValue(Report.class));
                 }
+
+                reports.add("סוג");
+                reports.add("מיקום");
+                reports.add("כיוון");
+                reports.add("תאריך");
+                reports.add("כמות");
+
+                for (Report report : tempReports) {
+                   report.addToList(reports);
+                }
+
+                arrayAdapterReports.notifyDataSetChanged();
             }
 
 

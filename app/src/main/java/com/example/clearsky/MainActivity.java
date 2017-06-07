@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         insertButton=(Button)findViewById(R.id.newreport) ;
         infoButton=(Button)findViewById(R.id.watchreport) ;
 
@@ -46,14 +47,19 @@ public class MainActivity extends AppCompatActivity {
                // String message = editText.getText().toString();
            //     intent.putExtra(EXTRA_MESSAGE, message);
                 startActivity(intent);
+
             }
         });
 
         infoButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Info info = new Info();
-                info.showInfo();
+
+                Intent myIntent = null;
+                myIntent = new Intent(MainActivity.this,ReportsView.class);
+                MainActivity.this.startActivity(myIntent);
+//                Info info = new Info();
+//                info.showInfo();
             }
         });
         //Firebase.set
@@ -68,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
 //        ArrayList childs = new ArrayList<String>();
 //        childs.add("users");
 //        childs.add("15");
+
 //        //Storing values to firebase
 //        DbProvider.getInstance().write(childs, person);
 //   //     DbProvider.getInstance().read();
