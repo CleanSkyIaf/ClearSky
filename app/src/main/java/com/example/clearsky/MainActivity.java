@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         childs.add("15");
         //Storing values to firebase
         DbProvider.getInstance().write(childs, person);
-        DbProvider.getInstance().read();
+     //   DbProvider.getInstance().read();
 
         childs = new ArrayList<String>();
         childs.add("users");
