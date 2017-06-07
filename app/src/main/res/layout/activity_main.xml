@@ -10,8 +10,26 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.clearsky.MainActivity">
 
-    <TextView
+    <Button
+        android:text="new report"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:id="@+id/newreport"
+        tools:text="new report"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/watchreport"
+        android:layout_toEndOf="@+id/watchreport"
+        android:layout_marginLeft="22dp"
+        android:layout_marginStart="22dp" />
+
+    <Button
+        android:text="watch report"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/watchreport"
+        tools:text="watch report"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
 </RelativeLayout>
