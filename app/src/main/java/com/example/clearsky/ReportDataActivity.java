@@ -62,9 +62,7 @@ public class ReportDataActivity extends AppCompatActivity {
         });
     }
 
-
     public void addReport(){
-
-
+        
     }
 }

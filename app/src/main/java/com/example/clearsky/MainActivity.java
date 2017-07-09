@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
             //    ReportDataActivity reportDataActivity = new ReportDataActivity();
                 Intent intent = new Intent(MainActivity.this, ReportDataActivity.class);
                 startActivity(intent);
-
             }
         });
 
