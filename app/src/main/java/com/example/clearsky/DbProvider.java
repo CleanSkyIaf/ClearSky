@@ -1,6 +1,7 @@
 package com.example.clearsky;
 
 import android.util.Log;
+import android.widget.ArrayAdapter;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -9,10 +10,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
-import java.security.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -38,10 +37,11 @@ public class DbProvider {
 
     public static void write(ArrayList<String> childs, Object obj){
         DatabaseReference currRef = database.getReference();
-        //currRef.setValue("reports");
+
         for (String child : childs) {
             currRef = currRef.child(child).push();
         }
+
         currRef.setValue(obj);
     }
 

@@ -43,9 +43,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view){
             //    ReportDataActivity reportDataActivity = new ReportDataActivity();
                 Intent intent = new Intent(MainActivity.this, ReportDataActivity.class);
-             //   EditText editText = (EditText) findViewById(R.id.editText);
-               // String message = editText.getText().toString();
-           //     intent.putExtra(EXTRA_MESSAGE, message);
                 startActivity(intent);
 
             }
