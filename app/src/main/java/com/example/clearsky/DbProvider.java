@@ -7,13 +7,9 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
 
 import static android.content.ContentValues.TAG;
 
@@ -23,8 +19,8 @@ import static android.content.ContentValues.TAG;
 
 public class DbProvider {
     protected static DbProvider dbProvider = null;
-    protected static FirebaseDatabase database = FirebaseDatabase.getInstance();
-    protected static DatabaseReference myRef = database.getReference();
+    protected static FirebaseDatabase _database = FirebaseDatabase.getInstance();
+    protected static DatabaseReference _myRef = _database.getReference();
 
     public static DbProvider getInstance() {
 
@@ -35,8 +31,12 @@ public class DbProvider {
         return dbProvider;
     }
 
+    public static DatabaseReference getRef() {
+        return _database.getReference();
+    }
+
     public static void write(ArrayList<String> childs, Object obj){
-        DatabaseReference currRef = database.getReference();
+        DatabaseReference currRef = _database.getReference();
 
         for (String child : childs) {
             currRef = currRef.child(child).push();
@@ -46,9 +46,9 @@ public class DbProvider {
     }
 
     public void readAllReports(final ArrayList<String> reports, final ArrayAdapter<String> arrayAdapterReports) {
-        // Read from the database
+        // Read from the _database
 
-        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        _myRef.addListenerForSingleValueEvent(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
