@@ -76,11 +76,9 @@ public class ReportDataActivity extends AppCompatActivity {
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                         context);
                 alertDialogBuilder.setTitle("permission problem-turn on location services on your device");
-                alertDialogBuilder.setMessage("nothing :)").setCancelable(false);
+                //alertDialogBuilder.setMessage("nothing :)").setCancelable(true);
                 AlertDialog alertDialog = alertDialogBuilder.create();
                 alertDialog.show();
-
-
 
                 return;
             }
@@ -113,7 +111,7 @@ public class ReportDataActivity extends AppCompatActivity {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                     context);
             alertDialogBuilder.setTitle("coordinates");
-            alertDialogBuilder.setMessage("the lat is  " +latitude+ "long:  "+ longitude).setCancelable(false);
+            alertDialogBuilder.setMessage("the lat is  " +latitude+ "long:  "+ longitude).setCancelable(true);
 
             AlertDialog alertDialog = alertDialogBuilder.create();
             alertDialog.show();
