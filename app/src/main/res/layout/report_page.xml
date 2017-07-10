@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:baselineAligned="false">
@@ -121,5 +122,18 @@
             android:layout_alignTop="@+id/birdType"
             android:layout_toRightOf="@+id/amount"
             android:layout_toEndOf="@+id/amount" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@mipmap/our_location"
+            android:id="@+id/locationButton"
+            android:layout_alignTop="@+id/locationText"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignBottom="@+id/locationText"
+            android:layout_toRightOf="@+id/locationText"
+            android:layout_toEndOf="@+id/locationText" />
+
     </RelativeLayout>
 </LinearLayout>
