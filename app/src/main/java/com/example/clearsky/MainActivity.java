@@ -59,28 +59,5 @@ public class MainActivity extends AppCompatActivity {
 //                info.showInfo();
             }
         });
-        //Firebase.set
-        // Write a message to the database
-        //DB
-//
-//        Person person = new Person();
-//        //dding values
-//        person.setName("tzion");
-//        person.setAddress("hadad");
-//
-//        ArrayList childs = new ArrayList<String>();
-//        childs.add("users");
-//        childs.add("15");
-
-//        //Storing values to firebase
-//        DbProvider.getInstance().write(childs, person);
-//   //     DbProvider.getInstance().read();
-//
-//        childs = new ArrayList<String>();
-//        childs.add("users");
-//        childs.add("16");
-//        //Storing values to firebase
-//        DbProvider.getInstance().write(childs, person);
-
     }
 }
