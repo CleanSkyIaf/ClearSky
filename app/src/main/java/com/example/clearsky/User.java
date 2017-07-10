@@ -5,6 +5,13 @@ package com.example.clearsky;
  */
 
 class User {
-    public static String userName;
-    public static String password;
+    private static String _userName;
+
+    public static String getUserName() {
+        return _userName;
+    }
+
+    public static void setUserName(String userName) {
+        _userName = userName;
+    }
 }

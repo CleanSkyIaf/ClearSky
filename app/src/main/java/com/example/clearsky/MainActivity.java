@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
 
     private Button insertButton;
     private Button infoButton;
+    private Button chatButton;
+
     Context context=this;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -42,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         insertButton=(Button)findViewById(R.id.newreport) ;
         infoButton=(Button)findViewById(R.id.watchreport) ;
+        chatButton=(Button)findViewById(R.id.chat) ;
 
         insertButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -54,11 +57,16 @@ public class MainActivity extends AppCompatActivity {
         infoButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-
-                Intent myIntent = null;
-                myIntent = new Intent(MainActivity.this,ReportsView.class);
+                Intent myIntent = new Intent(MainActivity.this,ReportsView.class);
                 MainActivity.this.startActivity(myIntent);
+            }
+        });
 
+        chatButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent intent = new Intent(MainActivity.this, ChatRooms.class);
+                startActivity(intent);
             }
         });
     }

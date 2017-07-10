@@ -63,11 +63,11 @@ public class LoginPage extends Activity {
                             alertDialogBuilder.setMessage("התחברת בהצלחה").setCancelable(false)
                                     .setPositiveButton("אישור", new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int id) {
-                                            //User.userName = userNameString;
-                                            //   User.password = passwordString;
-                                            Intent myIntent = null;
+                                            //Set static user details
+                                            User.setUserName(userNameString);
+
                                             LoginPage.this.finish();
-                                            myIntent = new Intent(LoginPage.this, MainActivity.class);
+                                            Intent myIntent = new Intent(LoginPage.this, MainActivity.class);
                                             LoginPage.this.startActivity(myIntent);
                                         }
                                     });
