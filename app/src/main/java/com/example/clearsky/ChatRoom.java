@@ -3,6 +3,7 @@ package com.example.clearsky;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -25,7 +26,6 @@ public class ChatRoom extends AppCompatActivity {
     private Button _sendButton;
     private TextView _msgText;
     private TextView _conversationChat;
-    private ScrollView _scrollChatView;
 
     private String _chatMsg, _chatUserName;
 
@@ -38,11 +38,11 @@ public class ChatRoom extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_room);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         _sendButton = (Button) findViewById(R.id.sendButton);
         _msgText = (TextView) findViewById(R.id.msgText);
         _conversationChat = (TextView)findViewById(R.id.conversationText);
-        _scrollChatView = (ScrollView) findViewById(R.id.chatScrollView);
 
         _userName = getIntent().getExtras().getString("user_name");
         _roomName = getIntent().getExtras().getString("room_name");
@@ -66,7 +66,7 @@ public class ChatRoom extends AppCompatActivity {
 
                 msgRoot.updateChildren(map2);
 
-                _msgText.clearComposingText();
+                _msgText.setText("");
             }
         });
 
