@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +15,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -44,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
         insertButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-            //    ReportDataActivity reportDataActivity = new ReportDataActivity();
                 Intent intent = new Intent(MainActivity.this, ReportDataActivity.class);
                 startActivity(intent);
             }
