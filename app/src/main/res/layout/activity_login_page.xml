@@ -33,16 +33,6 @@
         android:textSize="50sp"
         android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/tfpassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/lbpassword"
-        android:layout_alignLeft="@+id/tfuserName"
-        android:layout_alignStart="@+id/tfuserName"
-        android:ems="10"
-        android:inputType="textPassword" />
-
     <Button
         android:id="@+id/btconnect"
         android:layout_width="wrap_content"
@@ -52,7 +42,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/lbscore"
         android:layout_below="@+id/tfpassword"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="70dp"
         android:text="התחברות" />
 
     <TextView
@@ -61,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/btconnect"
         android:layout_below="@+id/lbheadLine"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="100dp"
         android:text="שם משתמש"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -69,11 +59,16 @@
         android:id="@+id/tfuserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="false"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentRight="false"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentTop="false"
         android:layout_alignTop="@+id/lbuserName"
-        android:layout_marginLeft="13dp"
-        android:layout_marginStart="30dp"
+        android:layout_toLeftOf="@+id/lbuserName"
+        android:layout_toStartOf="@+id/lbuserName"
+        android:autoText="false"
         android:ems="10"
         android:singleLine="true" />
 
@@ -87,5 +82,18 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:id="@+id/tfpassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/lbpassword"
+        android:layout_alignEnd="@+id/tfuserName"
+        android:layout_alignLeft="@+id/tfuserName"
+        android:layout_alignRight="@+id/tfuserName"
+        android:layout_alignStart="@+id/tfuserName"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:singleLine="true" />
 
 </RelativeLayout>
