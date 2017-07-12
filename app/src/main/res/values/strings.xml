@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">ClearSky</string>
+    <string-array name="birds_type">
+        <item>"חסידה לבנה"</item>
+        <item>"שקנאי מצוי"</item>
+        <item>"עגור אפור"</item>
+        <item>"דורס ב.מ"</item>
+        <item>"איית צרעים"</item>
+        <item>"דיה שחורה"</item>
+        <item>"עיט חורש"</item>
+        <item>"עקב ב.מ"</item>
+    </string-array>
 </resources>

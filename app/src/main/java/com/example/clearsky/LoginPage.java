@@ -1,8 +1,5 @@
 package com.example.clearsky;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -13,12 +10,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Spinner;
 import android.widget.TextView;
-
-import com.example.clearsky.DbProvider;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -37,7 +30,7 @@ public class LoginPage extends Activity {
 
         checkInternetCon(context);
 
-        Button signIn = (Button) findViewById(R.id.btconnect);
+        Button signIn = (Button) findViewById(R.id.btconnect3);
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
