@@ -8,35 +8,36 @@
 
     <EditText
         android:id="@+id/msgText"
-        android:layout_width="284dp"
+        android:layout_width="264dp"
         android:layout_height="47dp"
-        android:layout_marginBottom="32dp"
         android:layout_marginRight="100dp"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginEnd="100dp" />
+        android:layout_marginEnd="100dp"
+        app:layout_constraintHorizontal_bias="0.25"
+        android:layout_marginBottom="8dp" />
 
     <Button
         android:id="@+id/sendButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="28dp"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
-        android:text="SEND"
+        android:text="שלח"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.09"
         app:layout_constraintLeft_toRightOf="@+id/msgText"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginBottom="8dp" />
 
     <ScrollView
         android:id="@+id/chatScrollView"
-        android:layout_width="397dp"
-        android:layout_height="500dp"
+        android:layout_width="336dp"
+        android:layout_height="428dp"
         android:layout_marginBottom="100dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
@@ -44,7 +45,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintVertical_bias="0.03">
 
         <TextView
             android:id="@+id/conversationText"
