@@ -23,6 +23,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -107,8 +108,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 TextView date = new TextView(context);
                 date.setTextColor(Color.GRAY);
                 date.setGravity(Gravity.CENTER);
-                date.setText("תאריך: " +  Calendar.getInstance().getTime());
                 date.setBackgroundColor(Color.WHITE);
+                Calendar.getInstance().setTimeInMillis(currReport.getDate());
+                date.setText("שעה: " +  (new SimpleDateFormat("HH:mm")).format(Calendar.getInstance().getTime()));
 
                 info.addView(desc);
                 info.addView(birdAzimuth);

@@ -35,17 +35,14 @@
 
     <Button
         android:id="@+id/btconnect"
-        android:layout_width="wrap_content"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/lbscore"
-        android:layout_alignParentBottom="false"
-        android:layout_alignParentEnd="false"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="false"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/lbscore"
-        android:layout_below="@+id/tfpassword"
-        android:layout_marginTop="70dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/lbpassword"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="46dp"
         android:text="התחברות" />
 
     <TextView
@@ -100,5 +97,17 @@
         android:ems="10"
         android:inputType="textPassword"
         android:singleLine="true" />
+
+    <Button
+        android:id="@+id/newUserBUtton"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/btconnect"
+        android:layout_alignBottom="@+id/btconnect"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp"
+        android:text="משתמש חדש" />
 
 </RelativeLayout>

@@ -35,14 +35,14 @@ public class DbProvider {
         return _database.getReference();
     }
 
-    public static void write(ArrayList<String> childs, Object obj){
+    public static void writeValue(ArrayList<String> childs, Object value){
         DatabaseReference currRef = _database.getReference();
 
         for (String child : childs) {
             currRef = currRef.child(child).push();
         }
 
-        currRef.setValue(obj);
+        currRef.setValue(value);
     }
 
     public void readAllReports(final ArrayList<String> reports, final ArrayAdapter<String> arrayAdapterReports) {
