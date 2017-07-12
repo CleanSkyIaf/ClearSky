@@ -64,7 +64,7 @@ public class ReportDataActivity extends AppCompatActivity {
         setContentView(R.layout.report_page);
 
         final EditText datePicker = (EditText) findViewById(R.id.dateText);
-        final EditText birdType = (EditText) findViewById(R.id.birdTypeText);
+        final Spinner birdType = (Spinner) findViewById(R.id.spinner_bird_type);
 
         datePicker.setOnClickListener(new View.OnClickListener() {
             @Override

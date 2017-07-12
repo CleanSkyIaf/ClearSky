@@ -89,7 +89,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 TextView birdCount = new TextView(context);
                 birdCount.setTextColor(Color.GRAY);
                 birdCount.setGravity(Gravity.CENTER);
-                birdCount.setText("כמות: " + Integer.toString(currReport.getBirdCount()));
+                birdCount.setText("כמות: " + currReport.getBirdCount());
                 birdCount.setBackgroundColor(Color.WHITE);
 
                 TextView birdKind = new TextView(context);
