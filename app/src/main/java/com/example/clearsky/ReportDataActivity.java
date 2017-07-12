@@ -1,7 +1,10 @@
 package com.example.clearsky;
 
+import android.*;
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,6 +18,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TimePicker;
+import android.widget.DatePicker;
 
 
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -25,7 +30,11 @@ import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -37,10 +46,12 @@ public class ReportDataActivity extends AppCompatActivity {
     private Report report;
     private Button sendButton;
     private ImageButton locationButton;
-    //private FusedLocationProviderClient mFusedLocationClient;
+
     Context context = this;
     private double longitude=0;
     private double latitude=0;
+
+    private Long timeInMills;
 
 
 
@@ -48,6 +59,42 @@ public class ReportDataActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.report_page);
+
+        final EditText datePicker = (EditText) findViewById(R.id.dateText);
+        final EditText birdType = (EditText) findViewById(R.id.birdTypeText);
+
+        datePicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View view){
+                final Dialog dialog = new Dialog(context);
+
+                dialog.setContentView(R.layout.date_activity);
+                dialog.setTitle("Custom Dialog");
+                final TimePicker tp = (TimePicker)dialog.findViewById(R.id.timePicker1);
+                Button sendButtond = (Button)dialog.findViewById(R.id.buttonOK);
+                sendButtond.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Date date = Calendar.getInstance().getTime();
+                        String dateString = (new SimpleDateFormat("dd/MM/YY")).format(date) + " "
+                                + String.format("%02d", tp.getCurrentHour()) + ":" + String.format("%02d", tp.getCurrentMinute());
+
+                        datePicker.setText(dateString);
+                        date.setHours(tp.getCurrentHour());
+                        date.setMinutes(tp.getCurrentMinute());
+                        Calendar cal = Calendar.getInstance();
+                        cal.setTime(date);
+                        timeInMills =  cal.getTimeInMillis();
+
+                        dialog.dismiss();
+                    }
+                });
+
+                dialog.show();
+
+            }
+        });
+
 
         sendButton = (Button) findViewById(R.id.sendReport);
         locationButton = (ImageButton) findViewById(R.id.locationButton);
@@ -64,7 +111,7 @@ public class ReportDataActivity extends AppCompatActivity {
             LocationManager locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 
 
-            if (ActivityCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 // TODO: Consider calling
                 //    ActivityCompat#requestPermissions
                 // here to request the missing permissions, and then overriding
@@ -123,24 +170,22 @@ public class ReportDataActivity extends AppCompatActivity {
                 String tmpType;
                 String tmpLocation;
                 String tmpDirection;
-                String tmpDate;
+                long tmpDate;
                 String tmpNum;
 
                 EditText editText1 = (EditText) findViewById(R.id.birdTypeText);
                 EditText editText2 = (EditText) findViewById(R.id.locationText);
                 EditText editText3 = (EditText) findViewById(R.id.directionText);
-                EditText editText4 = (EditText) findViewById(R.id.dateText);
                 EditText editText5 = (EditText) findViewById(R.id.amountText);
 
                 tmpType = editText1.getText().toString();
                 tmpLocation = editText2.getText().toString();
                 tmpDirection = editText3.getText().toString();
-                tmpDate = editText4.getText().toString();
                 tmpNum = editText5.getText().toString();
                 ArrayList<String> array = new ArrayList<String>();
 
                 array.add("reports");
-                report = new Report(tmpType,tmpLocation,tmpDirection,tmpDate,Integer.parseInt(tmpNum));
+                report = new Report(tmpType,tmpLocation,tmpDirection,timeInMills,Integer.parseInt(tmpNum));
                 DbProvider.write(array,report);
                 AlertDialog.Builder hiB = new AlertDialog.Builder(context);
                 hiB.setTitle("sent successfully");

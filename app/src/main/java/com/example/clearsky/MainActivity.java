@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private Button insertButton;
     private Button infoButton;
     private Button chatButton;
+    private Button mapButton;
 
     Context context=this;
     /**
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         insertButton=(Button)findViewById(R.id.newreport) ;
         infoButton=(Button)findViewById(R.id.watchreport) ;
         chatButton=(Button)findViewById(R.id.chat) ;
+        mapButton=(Button)findViewById(R.id.map);
 
         insertButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -66,6 +68,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view){
                 Intent intent = new Intent(MainActivity.this, ChatRooms.class);
+                startActivity(intent);
+            }
+        });
+
+        mapButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent intent = new Intent(MainActivity.this, MapsActivity.class);
                 startActivity(intent);
             }
         });

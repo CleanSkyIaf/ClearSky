@@ -49,7 +49,7 @@ public class ChatRoom extends AppCompatActivity {
 
         setTitle(" Room - " + _roomName);
 
-        root = FirebaseDatabase.getInstance().getReference().child(_roomName);
+        root = FirebaseDatabase.getInstance().getReference().child("ChatRoom").child(_roomName);
 
         _sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
