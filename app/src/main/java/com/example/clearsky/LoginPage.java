@@ -1,5 +1,8 @@
 package com.example.clearsky;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -10,8 +13,12 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.example.clearsky.DbProvider;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,10 +37,13 @@ public class LoginPage extends Activity {
 
         checkInternetCon(context);
 
-        Button signIn = (Button) findViewById(R.id.btconnect3);
+        Button newUser = (Button) findViewById(R.id.newUserBUtton);
+        Button signIn = (Button) findViewById(R.id.btconnect);
+
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 // TODO Auto-generated method stub
                 DatabaseReference myFirebaseRef = DbProvider.getRef();
                 DatabaseReference ref;
@@ -66,14 +76,13 @@ public class LoginPage extends Activity {
                                     });
                             AlertDialog alertDialog = alertDialogBuilder.create();
                             alertDialog.show();
-                        }
-                        else {
+                        } else {
                             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                                     context);
                             alertDialogBuilder.setTitle("הפרטים שהוזנו שגויים");
                             alertDialogBuilder.setMessage("שם משתמש או סיסמה שגויים, אנא נסה שוב").setCancelable(false)
-                                    .setPositiveButton("אישור",new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog,int id) {
+                                    .setPositiveButton("אישור", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
                                             dialog.cancel();
                                         }
                                     });
@@ -82,6 +91,7 @@ public class LoginPage extends Activity {
 
                         }
                     }
+
                     @Override
                     public void onCancelled(DatabaseError arg0) {
                         // TODO Auto-generated method stub
@@ -90,11 +100,101 @@ public class LoginPage extends Activity {
                 });
             }
         });
+
+        newUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Dialog signInDialog = new Dialog(context);
+                signInDialog.setContentView(R.layout.dialog_sign_up);
+                signInDialog.setTitle("משתמש חדש");
+
+                final TextView newUserFirstName = (TextView)signInDialog.findViewById(R.id.newUserFirstNameText);
+                final TextView newUserLastName = (TextView)signInDialog.findViewById(R.id.newUserLastNameText);
+                final TextView newUserUserName = (TextView)signInDialog.findViewById(R.id.newUserUserNameText);
+                final TextView newUserPassword = (TextView)signInDialog.findViewById(R.id.newUserPasswordText);
+                Button signUpButton = (Button)signInDialog.findViewById(R.id.newUserSignUpButton);
+
+                signUpButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // TODO Auto-generated method stub
+                        DatabaseReference myFirebaseRef = DbProvider.getRef();
+                        final DatabaseReference ref;
+                        ref = myFirebaseRef.child("users");
+
+                        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot snapshot) {
+
+                                final String userNameString = newUserUserName.getText().toString().trim();
+                                final String passwordString = newUserPassword.getText().toString();
+
+                                if(snapshot.child(userNameString).exists()){
+
+                                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                                            context);
+                                    alertDialogBuilder.setTitle("שם משתמש קיים");
+                                    alertDialogBuilder.setMessage("שם המשתמש כבר קיים, אנא נסה שם אחר").setCancelable(false)
+                                            .setPositiveButton("אישור", new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int id) {
+                                                    dialog.cancel();
+                                                }
+                                            });
+
+                                    AlertDialog alertDialog = alertDialogBuilder.create();
+                                    alertDialog.show();
+
+                                }
+                                else {
+
+                                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                                            context);
+                                    alertDialogBuilder.setTitle("הרשמה");
+                                    alertDialogBuilder.setMessage("נרשמת בהצלחה").setCancelable(false)
+                                            .setPositiveButton("אישור", new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int id) {
+
+                                                    String firstNameString = newUserFirstName.getText().toString();
+                                                    String lastNameString = newUserLastName.getText().toString();
+
+                                                    User.setUserName(userNameString);
+                                                    User.set_passName(passwordString);
+                                                    User.set_firstName(firstNameString);
+                                                    User.set_lastName(lastNameString);
+
+                                                    ref.child(userNameString).setValue( new newUser(
+                                                            userNameString,
+                                                            passwordString,
+                                                            firstNameString,
+                                                            lastNameString));
+
+                                                    LoginPage.this.finish();
+                                                    Intent myIntent = new Intent(LoginPage.this, MainActivity.class);
+                                                    LoginPage.this.startActivity(myIntent);
+                                                }
+                                            });
+                                    AlertDialog alertDialog = alertDialogBuilder.create();
+                                    alertDialog.show();
+
+                                }
+                            }
+                            public void onCancelled(DatabaseError arg0) {
+                                // TODO Auto-generated method stub
+
+                            }
+                        });
+                    }
+                });
+
+                signInDialog.show();
+            }
+        });
     }
 
     private boolean isCorrectUser(DataSnapshot snapshot, String userNameString, String passwordString) {
         return snapshot.child(userNameString).exists() &&
-                snapshot.child(userNameString).getValue().toString().equals(passwordString);
+                snapshot.child(userNameString).child("password").getValue().toString().equals(passwordString);
     }
 
     private void checkInternetCon(Context context) {

@@ -15,6 +15,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -71,8 +72,9 @@ public class ReportDataActivity extends AppCompatActivity {
             public void onClick (View view){
                 final Dialog dialog = new Dialog(context);
 
-                dialog.setContentView(R.layout.date_activity);
-                dialog.setTitle("Custom Dialog");
+                dialog.setContentView(R.layout.dialog_date);
+                dialog.setTitle("שעון");
+
                 final TimePicker tp = (TimePicker)dialog.findViewById(R.id.timePicker1);
                 Button sendButtond = (Button)dialog.findViewById(R.id.buttonOK);
                 sendButtond.setOnClickListener(new View.OnClickListener() {
@@ -81,14 +83,35 @@ public class ReportDataActivity extends AppCompatActivity {
                         Date date = Calendar.getInstance().getTime();
                         String dateString = (new SimpleDateFormat("dd/MM/YY")).format(date) + " "
                                 + String.format("%02d", tp.getCurrentHour()) + ":" + String.format("%02d", tp.getCurrentMinute());
-
                         datePicker.setText(dateString);
                         date.setHours(tp.getCurrentHour());
                         date.setMinutes(tp.getCurrentMinute());
                         Calendar cal = Calendar.getInstance();
                         cal.setTime(date);
                         timeInMills =  cal.getTimeInMillis();
+                        if(timeInMills> Calendar.getInstance().getTimeInMillis()) {
 
+                            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                                    context);
+                            TextView title = new TextView(context);
+                            title.setText("שעה עתידית");
+                            title.setPadding(10, 10, 10, 10);
+                            title.setGravity(Gravity.CENTER);
+                            title.setTextSize(20);
+
+                            alertDialogBuilder.setCustomTitle(title);
+                            alertDialogBuilder.setMessage("השעה שהוכנסה לא חוקית. אנא תקן השעה").setCancelable(false)
+                                    .setPositiveButton("אישור",new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog,int id) {
+                                            dialog.cancel();
+                                        }
+                                    });
+                            AlertDialog alertDialog = alertDialogBuilder.create();
+                            alertDialog.show();
+
+
+                        }
+                        else
                         dialog.dismiss();
                     }
                 });
@@ -184,14 +207,33 @@ public class ReportDataActivity extends AppCompatActivity {
                 tmpDirection = editText3.getText().toString();
                 tmpNum = editText5.getSelectedItem().toString();
                 ArrayList<String> array = new ArrayList<String>();
-
                 array.add("reports");
                 report = new Report(tmpType,tmpLocation,tmpDirection,timeInMills,tmpNum);
-                DbProvider.write(array,report);
-                AlertDialog.Builder hiB = new AlertDialog.Builder(context);
-                hiB.setTitle("sent successfully");
-                //hiB.setMessage("go to sleep");
-                hiB.create().show();
+                DbProvider.writeValue(array,report);
+
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                        context);
+                TextView title = new TextView(context);
+                title.setText("שליחת דיווח");
+                title.setPadding(10, 10, 10, 10);
+                title.setGravity(Gravity.CENTER);
+                title.setTextSize(20);
+
+                alertDialogBuilder.setCustomTitle(title);
+                alertDialogBuilder.setMessage("הדיווח נשלח בהצלחה").setCancelable(false)
+                        .setPositiveButton("אישור",new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                dialog.cancel();
+                                finish();
+                            }
+                        });
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+
+//                AlertDialog.Builder hiB = new AlertDialog.Builder(context);
+//                hiB.setTitle("sent successfully");
+//                //hiB.setMessage("go to sleep");
+//                hiB.create().show();
             }
         });
 
