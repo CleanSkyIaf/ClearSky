@@ -1,5 +1,6 @@
 package com.example.clearsky;
 
+import android.util.Log;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
@@ -13,12 +14,12 @@ public class Report {
     private String birdKind;
     private String birdPlace;
     private String birdAzimuth;
-    private String date;
+    private Long date;
     private String birdCount;
 
     public Report() {}
 
-    public Report(String birdKind, String birdPlace, String birdAzimuth, String date, String birdCount) {
+    public Report(String birdKind, String birdPlace, String birdAzimuth, Long date, String birdCount) {
         this.birdKind = birdKind;
         this.birdPlace = birdPlace;
         this.birdAzimuth = birdAzimuth;
@@ -50,11 +51,11 @@ public class Report {
         this.birdAzimuth = birdAzimuth;
     }
 
-    public String getDate() {
+    public Long getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Long date) {
         this.date = date;
     }
 
@@ -70,7 +71,7 @@ public class Report {
         lst.add(this.birdKind);
         lst.add(this.birdPlace);
         lst.add(this.birdAzimuth);
-        lst.add(this.date);
+        lst.add(Long.toString(this.date));
         lst.add(this.birdCount);
     }
 }
