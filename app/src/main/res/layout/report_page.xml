@@ -55,17 +55,6 @@
             android:layout_alignStart="@+id/date"
             android:layout_marginTop="60dp" />
 
-        <Button
-            android:text="שלח דיווח"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/amountText"
-            android:layout_alignRight="@+id/amountText"
-            android:layout_alignEnd="@+id/amountText"
-            android:layout_marginRight="30dp"
-            android:layout_marginEnd="30dp"
-            android:id="@+id/sendReport"/>
-
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -100,16 +89,6 @@
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:ems="10"
-            android:id="@+id/amountText"
-            android:layout_alignTop="@+id/amount"
-            android:layout_alignLeft="@+id/directionText"
-            android:layout_alignStart="@+id/directionText" />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
             android:id="@+id/dateText"
             android:layout_alignTop="@+id/date"
             android:layout_alignLeft="@+id/directionText"
@@ -134,6 +113,40 @@
             android:layout_alignParentTop="true"
             android:layout_alignLeft="@+id/locationText"
             android:layout_alignStart="@+id/locationText" />
+
+        <Button
+            android:text="שלח דיווח"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/sendReport"
+            android:layout_alignParentBottom="true"
+            android:layout_toLeftOf="@+id/locationButton"
+            android:layout_toStartOf="@+id/locationButton"
+            android:layout_marginRight="14dp"
+            android:layout_marginEnd="14dp"
+            android:layout_marginBottom="21dp" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner_birds_amount"
+            android:entries="@array/birds_amount"
+            android:layout_alignTop="@+id/amount"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignLeft="@+id/dateText"
+            android:layout_alignStart="@+id/dateText" />
+
+        <!--<EditText-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:inputType="textPersonName"-->
+            <!--android:ems="10"-->
+            <!--android:id="@+id/amountText"-->
+            <!--android:layout_alignBaseline="@+id/amount"-->
+            <!--android:layout_alignBottom="@+id/amount"-->
+            <!--android:layout_toRightOf="@+id/date"-->
+            <!--android:layout_toEndOf="@+id/date" />-->
 
     </RelativeLayout>
 </LinearLayout>

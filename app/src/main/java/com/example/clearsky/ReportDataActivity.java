@@ -131,17 +131,17 @@ public class ReportDataActivity extends AppCompatActivity {
                 EditText editText2 = (EditText) findViewById(R.id.locationText);
                 EditText editText3 = (EditText) findViewById(R.id.directionText);
                 EditText editText4 = (EditText) findViewById(R.id.dateText);
-                EditText editText5 = (EditText) findViewById(R.id.amountText);
+                Spinner editText5 = (Spinner) findViewById(R.id.spinner_birds_amount);
 
                 tmpType = editText1.getSelectedItem().toString();
                 tmpLocation = editText2.getText().toString();
                 tmpDirection = editText3.getText().toString();
                 tmpDate = editText4.getText().toString();
-                tmpNum = editText5.getText().toString();
+                tmpNum = editText5.getSelectedItem().toString();
                 ArrayList<String> array = new ArrayList<String>();
 
                 array.add("reports");
-                report = new Report(tmpType,tmpLocation,tmpDirection,tmpDate,Integer.parseInt(tmpNum));
+                report = new Report(tmpType,tmpLocation,tmpDirection,tmpDate,tmpNum);
                 DbProvider.write(array,report);
                 AlertDialog.Builder hiB = new AlertDialog.Builder(context);
                 hiB.setTitle("sent successfully");

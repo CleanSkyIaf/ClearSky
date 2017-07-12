@@ -10,4 +10,24 @@
         <item>"עיט חורש"</item>
         <item>"עקב ב.מ"</item>
     </string-array>
+    <string-array name="birds_amount">
+        <item>"0-50"</item>
+        <item>"50-100"</item>
+        <item>"100-200"</item>
+        <item>"200-500"</item>
+        <item>"500-1000"</item>
+        <item>"1000-2000"</item>
+        <item>"2000-3000"</item>
+        <item>"3000-4000"</item>
+        <item>"4000-5000"</item>
+        <item>"5000-6000"</item>
+        <item>"6000-7000"</item>
+        <item>"7000-8000"</item>
+        <item>"8000-9000"</item>
+        <item>"9000-10000"</item>
+        <item>"10000 ומעלה"</item>
+        <item>"לא ידוע"</item>
+
+    </string-array>
+
 </resources>
