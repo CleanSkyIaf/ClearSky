@@ -30,5 +30,14 @@
         <item>"לא ידוע"</item>
 
     </string-array>
-
+    <string-array name="direction_arr">
+        <item>"צפון"</item>
+        <item>"דרום"</item>
+        <item>"מזרח"</item>
+        <item>"מערב"</item>
+        <item>"צפון-מזרח"</item>
+        <item>"צפון-מערב"</item>
+        <item>"דרום-מזרח"</item>
+        <item>"דרום-מערב"</item>
+    </string-array>
 </resources>

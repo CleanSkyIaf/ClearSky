@@ -16,15 +16,19 @@ public class Report {
     private String birdAzimuth;
     private Long date;
     private String birdCount;
+    private String reporter;
+    private String height;
 
     public Report() {}
 
-    public Report(String birdKind, String birdPlace, String birdAzimuth, Long date, String birdCount) {
+    public Report(String birdKind, String birdPlace, String birdAzimuth, Long date, String birdCount,String reporter,String height) {
         this.birdKind = birdKind;
         this.birdPlace = birdPlace;
         this.birdAzimuth = birdAzimuth;
         this.date = date;
         this.birdCount = birdCount;
+        this.reporter = reporter;
+        this.height = height;
     }
 
     public String getBirdKind() {
@@ -67,11 +71,31 @@ public class Report {
         this.birdCount = birdCount;
     }
 
+    public String getReporter() {
+        return reporter;
+    }
+
+    public void setReporter(String reporter) {
+        this.reporter = reporter;
+    }
+
+    public String getHeight() {
+        return height;
+    }
+
+    public void setHeight(String height) {
+        this.height = height;
+    }
+
     public void addToList(ArrayList<String> lst) {
         lst.add(this.birdKind);
         lst.add(this.birdPlace);
         lst.add(this.birdAzimuth);
         lst.add(Long.toString(this.date));
         lst.add(this.birdCount);
+        lst.add(this.reporter);
+        lst.add(this.height);
     }
+
+
 }

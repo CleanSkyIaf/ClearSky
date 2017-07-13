@@ -193,22 +193,24 @@ public class ReportDataActivity extends AppCompatActivity {
                 String tmpDirection;
                 long tmpDate;
                 String tmpNum;
+                String tmpHeight="100";
 
 
                 Spinner editText1 = (Spinner) findViewById(R.id.spinner_bird_type);
 //                TextView textView = (TextView)mySpinner.getSelectedView();
 //                String result = textView.getText().toString();
                 EditText editText2 = (EditText) findViewById(R.id.locationText);
-                EditText editText3 = (EditText) findViewById(R.id.directionText);
+                Spinner editText3 = (Spinner) findViewById(R.id.spinner_direction);
+                EditText editText4 =  (EditText) findViewById(R.id.height_text);
                 Spinner editText5 = (Spinner) findViewById(R.id.spinner_birds_amount);
 
                 tmpType = editText1.getSelectedItem().toString();
                 tmpLocation = editText2.getText().toString();
-                tmpDirection = editText3.getText().toString();
+                tmpDirection = editText3.getSelectedItem().toString();
                 tmpNum = editText5.getSelectedItem().toString();
                 ArrayList<String> array = new ArrayList<String>();
                 array.add("reports");
-                report = new Report(tmpType,tmpLocation,tmpDirection,timeInMills,tmpNum);
+                report = new Report(tmpType,tmpLocation,tmpDirection,timeInMills,tmpNum,User.getUserName(),tmpHeight);
                 DbProvider.writeValue(array,report);
 
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(

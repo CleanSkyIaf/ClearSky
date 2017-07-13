@@ -41,29 +41,9 @@
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/direction"
             android:layout_alignStart="@+id/direction"
-            android:layout_below="@+id/directionText"
+            android:layout_below="@+id/spinner_direction"
             android:layout_marginTop="55dp"
             android:text="זמן נדידה:" />
-
-        <TextView
-            android:text="כמות ציפורים"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/amount"
-            android:layout_below="@+id/dateText"
-            android:layout_alignLeft="@+id/date"
-            android:layout_alignStart="@+id/date"
-            android:layout_marginTop="60dp" />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/directionText"
-            android:layout_alignTop="@+id/direction"
-            android:layout_alignLeft="@+id/locationText"
-            android:layout_alignStart="@+id/locationText" />
 
         <TextView
             android:text="סוג ציפור:"
@@ -74,27 +54,6 @@
             android:layout_alignRight="@+id/location"
             android:layout_alignEnd="@+id/location" />
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/locationText"
-            android:layout_alignTop="@+id/location"
-            android:layout_toRightOf="@+id/direction"
-            android:layout_toEndOf="@+id/direction" />
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@mipmap/our_location"
-            android:id="@+id/locationButton"
-            android:layout_marginRight="24dp"
-            android:layout_marginEnd="24dp"
-            android:layout_alignTop="@+id/locationText"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
-
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -104,40 +63,98 @@
             android:layout_alignLeft="@+id/locationText"
             android:layout_alignStart="@+id/locationText" />
 
+        <EditText
+            android:id="@+id/dateText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/spinner_direction"
+            android:layout_alignRight="@+id/spinner_direction"
+            android:layout_below="@+id/spinner_direction"
+            android:layout_marginTop="43dp"
+            android:focusable="false"
+            android:ems="10"
+            android:inputType="date" />
+
         <Button
             android:text="שלח דיווח"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/sendReport"
             android:layout_alignParentBottom="true"
-            android:layout_toLeftOf="@+id/locationButton"
-            android:layout_toStartOf="@+id/locationButton"
-            android:layout_marginRight="14dp"
-            android:layout_marginEnd="14dp"
-            android:layout_marginBottom="21dp" />
+            android:layout_toRightOf="@+id/date"
+            android:layout_toEndOf="@+id/date" />
+
+        <TextView
+            android:text="כמות ציפורים"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/amount"
+            android:layout_above="@+id/height"
+            android:layout_alignLeft="@+id/height"
+            android:layout_alignStart="@+id/height"
+            android:layout_marginBottom="54dp" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/locationText"
+            android:layout_alignTop="@+id/location"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@mipmap/our_location"
+            android:id="@+id/locationButton"
+            android:layout_alignTop="@+id/locationText"
+            android:layout_toLeftOf="@+id/locationText"
+            android:layout_toStartOf="@+id/locationText" />
 
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/spinner_birds_amount"
             android:entries="@array/birds_amount"
-            android:layout_alignTop="@+id/amount"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignLeft="@+id/dateText"
-            android:layout_alignStart="@+id/dateText" />
+            android:layout_alignBottom="@+id/amount"
+            android:layout_alignLeft="@+id/amount"
+            android:layout_alignStart="@+id/amount" />
 
         <EditText
-            android:id="@+id/dateText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/directionText"
-            android:layout_alignRight="@+id/directionText"
-            android:layout_below="@+id/directionText"
-            android:layout_marginTop="43dp"
-            android:focusable="false"
+            android:inputType="textPersonName"
             android:ems="10"
-            android:inputType="date" />
+            android:id="@+id/height_text"
+            android:layout_alignTop="@+id/height"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:text="גובה"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/height"
+            android:layout_marginBottom="16dp"
+            android:layout_above="@+id/sendReport"
+            android:layout_alignLeft="@+id/date"
+            android:layout_alignStart="@+id/date" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner_direction"
+            android:entries="@array/direction_arr"
+            android:layout_alignBaseline="@+id/direction"
+            android:layout_alignBottom="@+id/direction"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignLeft="@+id/direction"
+            android:layout_alignStart="@+id/direction" />
+
+
         <!--<EditText-->
         <!--android:layout_width="wrap_content"-->
         <!--android:layout_height="wrap_content"-->
