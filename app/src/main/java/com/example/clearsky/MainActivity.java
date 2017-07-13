@@ -1,27 +1,11 @@
 package com.example.clearsky;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.location.Location;
-import android.location.LocationManager;
-import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
-
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -30,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
     private Button infoButton;
     private Button chatButton;
     private Button mapButton;
+    private Button manageUsersButton;
 
     Context context=this;
     /**
@@ -41,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         insertButton=(Button)findViewById(R.id.newreport) ;
         infoButton=(Button)findViewById(R.id.watchreport) ;
@@ -79,5 +63,18 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        if (User.getIsAdmin()) {
+            manageUsersButton=(Button)findViewById(R.id.manageUsersbutton);
+            manageUsersButton.setVisibility(View.VISIBLE);
+
+            manageUsersButton.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View view){
+                    Intent intent = new Intent(MainActivity.this, UsersListActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
     }
 }

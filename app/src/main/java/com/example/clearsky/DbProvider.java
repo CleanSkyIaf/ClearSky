@@ -1,7 +1,10 @@
 package com.example.clearsky;
 
+import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -72,6 +75,40 @@ public class DbProvider {
                 }
 
                 arrayAdapterReports.notifyDataSetChanged();
+            }
+
+
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+    }
+
+    public void readAllUsers(final ArrayList<String> usersList, final ArrayAdapter<String> arrayAdapterUsers) {
+        _myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+
+                ArrayList<String> tempUsers = new ArrayList<>();
+
+                for (DataSnapshot postSnapshot: dataSnapshot.child("users").getChildren()) {
+
+                    String currUserName = postSnapshot.child("userName").getValue().toString();
+
+                    if (!currUserName.equals(User.getUserName())) {
+                        tempUsers.add(currUserName);
+                    }
+                }
+
+                for (String user : tempUsers) {
+                    usersList.add(user);
+                }
+
+                arrayAdapterUsers.notifyDataSetChanged();
             }
 
 

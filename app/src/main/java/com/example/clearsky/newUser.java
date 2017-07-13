@@ -5,16 +5,20 @@ package com.example.clearsky;
  */
 
 class newUser {
+
     private String _userName;
     private String _password;
     private String _firstName;
     private String _lastName;
+    private boolean _isAdmin = false;
+    private boolean _isAcceptedUser = false;
 
-    public newUser(String _userName, String _passName, String _firstName, String _lastName) {
-        this._userName = _userName;
-        this._password = _passName;
-        this._firstName = _firstName;
-        this._lastName = _lastName;
+    public newUser(String userName, String passName, String firstName, String lastName) {
+
+        this._userName = userName;
+        this._password = passName;
+        this._firstName = firstName;
+        this._lastName = lastName;
     }
 
     public String getFirstName() { return _firstName; }
@@ -26,4 +30,8 @@ class newUser {
     }
 
     public String getPassword() { return _password; }
+
+    public boolean getIsAdmin() { return _isAdmin; }
+
+    public boolean getIsAcceptedUser() { return _isAcceptedUser; }
 }

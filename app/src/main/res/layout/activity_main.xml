@@ -59,4 +59,14 @@
         android:layout_marginRight="24dp"
         android:layout_marginEnd="24dp" />
 
+    <Button
+        android:id="@+id/manageUsersbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="7dp"
+        android:text="ניהול משתמשים"
+        android:visibility="invisible" />
+
 </RelativeLayout>
