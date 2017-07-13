@@ -1,17 +1,14 @@
 package com.example.clearsky;
 
-import android.*;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -23,23 +20,13 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.DatePicker;
 
-
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.LocationSettingsRequest;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationRequest;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by tsion on 07/06/2017.
@@ -142,8 +129,6 @@ public class ReportDataActivity extends AppCompatActivity {
                     // to handle the case where the user grants the permission. See the documentation
                     // for ActivityCompat#requestPermissions for more details.
 
-
-
                    // return;
                 }
                 LocationManager locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
@@ -155,8 +140,7 @@ public class ReportDataActivity extends AppCompatActivity {
                     }
                 };
 
-               // locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, (android.location.LocationListener) locationListener);
-
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, (android.location.LocationListener) locationListener);
 
                 Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                 if (location != null) {
@@ -171,7 +155,6 @@ public class ReportDataActivity extends AppCompatActivity {
                         latitude = location.getLatitude();
                     }
                 }
-
 
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                         context);
@@ -260,7 +243,7 @@ public class ReportDataActivity extends AppCompatActivity {
                     // functionality that depends on this permission.
                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                             context);
-                    alertDialogBuilder.setTitle("permission problem-turn on location services on your device");
+                    alertDialogBuilder.setTitle("permission problem");
                     //alertDialogBuilder.setMessage("nothing :)").setCancelable(true);
                     AlertDialog alertDialog = alertDialogBuilder.create();
                     alertDialog.show();
