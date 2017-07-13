@@ -35,8 +35,8 @@
 
     <ListView
         android:id="@+id/roomsList"
-        android:layout_width="389dp"
-        android:layout_height="503dp"
+        android:layout_width="352dp"
+        android:layout_height="487dp"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp" />
 </android.support.constraint.ConstraintLayout>

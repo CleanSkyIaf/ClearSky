@@ -1,7 +1,5 @@
 package com.example.clearsky;
 
-import android.Manifest;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -11,6 +9,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
@@ -21,12 +20,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import com.google.android.gms.location.LocationListener;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by tsion on 07/06/2017.
@@ -37,13 +35,12 @@ public class ReportDataActivity extends AppCompatActivity {
     private Report report;
     private Button sendButton;
     private ImageButton locationButton;
-
+    private LocationManager mLocationManager;
     Context context = this;
-    private double longitude=0;
-    private double latitude=0;
-
-    private Long timeInMills;
-
+    private double longitude = 0;
+    private double latitude = 0;
+    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+    private Long timeInMills=null;
 
 
     @Override
@@ -56,14 +53,14 @@ public class ReportDataActivity extends AppCompatActivity {
 
         datePicker.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick (View view){
+            public void onClick(View view) {
                 final Dialog dialog = new Dialog(context);
 
                 dialog.setContentView(R.layout.dialog_date);
                 dialog.setTitle("שעון");
 
-                final TimePicker tp = (TimePicker)dialog.findViewById(R.id.timePicker1);
-                Button sendButtond = (Button)dialog.findViewById(R.id.buttonOK);
+                final TimePicker tp = (TimePicker) dialog.findViewById(R.id.timePicker1);
+                Button sendButtond = (Button) dialog.findViewById(R.id.buttonOK);
                 sendButtond.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -75,8 +72,8 @@ public class ReportDataActivity extends AppCompatActivity {
                         date.setMinutes(tp.getCurrentMinute());
                         Calendar cal = Calendar.getInstance();
                         cal.setTime(date);
-                        timeInMills =  cal.getTimeInMillis();
-                        if(timeInMills> Calendar.getInstance().getTimeInMillis()) {
+                        timeInMills = cal.getTimeInMillis();
+                        if (timeInMills > Calendar.getInstance().getTimeInMillis()) {
 
                             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                                     context);
@@ -88,8 +85,8 @@ public class ReportDataActivity extends AppCompatActivity {
 
                             alertDialogBuilder.setCustomTitle(title);
                             alertDialogBuilder.setMessage("השעה שהוכנסה לא חוקית. אנא תקן השעה").setCancelable(false)
-                                    .setPositiveButton("אישור",new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog,int id) {
+                                    .setPositiveButton("אישור", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
                                             dialog.cancel();
                                         }
                                     });
@@ -97,9 +94,8 @@ public class ReportDataActivity extends AppCompatActivity {
                             alertDialog.show();
 
 
-                        }
-                        else
-                        dialog.dismiss();
+                        } else
+                            dialog.dismiss();
                     }
                 });
 
@@ -118,59 +114,57 @@ public class ReportDataActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (ActivityCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    // TODO: Consider calling
-                    //    ActivityCompat#requestPermissions
-                    ActivityCompat.requestPermissions((Activity) context,new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+                mLocationManager = (LocationManager) getApplicationContext().getSystemService(LOCATION_SERVICE);
+                List<String> providers = mLocationManager.getProviders(true);
+                Location bestLocation = null;
+                for (String provider : providers) {
+                    if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                        // TODO: Consider calling
+                        //    ActivityCompat#requestPermissions
+                        // here to request the missing permissions,
 
-                    // here to request the missing permissions, and then overriding
-                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                    //                                          int[] grantResults)
-                    // to handle the case where the user grants the permission. See the documentation
-                    // for ActivityCompat#requestPermissions for more details.
+//
+//                        ActivityCompat.requestPermissions( this, new String[] {  android.Manifest.permission.ACCESS_COARSE_LOCATION,android.Manifest.permission.ACCESS_FINE_LOCATION   },
+//                                MY_PERMISSIONS_REQUEST_LOCATION  );
 
-                   // return;
-                }
-                LocationManager locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-
-                LocationListener locationListener = new LocationListener() {
-                    public void onLocationChanged(Location location) {
-                        longitude = location.getLongitude();
-                        latitude = location.getLatitude();
+                        // and then overriding
+                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                        //                                          int[] grantResults)
+                        // to handle the case where the user grants the permission. See the documentation
+                        // for ActivityCompat#requestPermissions for more details.
+                        //return TODO;
                     }
-                };
-
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, (android.location.LocationListener) locationListener);
-
-                Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                if (location != null) {
-                    longitude = location.getLongitude();
-                    latitude = location.getLatitude();
-                }
-                else{
-
-                    location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-                    if (location != null) {
-                        longitude = location.getLongitude();
-                        latitude = location.getLatitude();
+                    Location l = mLocationManager.getLastKnownLocation(provider);
+                    if (l == null) {
+                        continue;
                     }
+                    if (bestLocation == null || l.getAccuracy() < bestLocation.getAccuracy()) {
+                        // Found best last known location: %s", l);
+                        bestLocation = l;
+                    }
+                }
+
+                if (bestLocation != null) {
+                    longitude = bestLocation.getLongitude();
+                    latitude = bestLocation.getLatitude();
                 }
 
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                         context);
                 alertDialogBuilder.setTitle("coordinates");
-                alertDialogBuilder.setMessage("the lat is  " +latitude+ "long:  "+ longitude).setCancelable(true);
+                alertDialogBuilder.setMessage("the lat is  " + latitude + "long:  " + longitude).setCancelable(true);
                 AlertDialog alertDialog = alertDialogBuilder.create();
                 alertDialog.show();
 
                 EditText textout = (EditText) findViewById(R.id.locationText); // need to be check
-                textout.setText(latitude+ ", "+ longitude);
+                textout.setText(latitude + ", " + longitude);
 
-            }});
+            }
+        });
 
-        sendButton.setOnClickListener(new View.OnClickListener(){
+        sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 String tmpType;
                 String tmpLocation;
                 String tmpDirection;
@@ -184,7 +178,7 @@ public class ReportDataActivity extends AppCompatActivity {
 //                String result = textView.getText().toString();
                 EditText editText2 = (EditText) findViewById(R.id.locationText);
                 Spinner editText3 = (Spinner) findViewById(R.id.spinner_direction);
-                EditText editText4 =  (EditText) findViewById(R.id.height_text);
+                EditText editText4 = (EditText) findViewById(R.id.height_text);
                 Spinner editText5 = (Spinner) findViewById(R.id.spinner_birds_amount);
 
                 tmpType = editText1.getSelectedItem().toString();
@@ -193,7 +187,7 @@ public class ReportDataActivity extends AppCompatActivity {
                 tmpHeight = editText4.getText().toString();
                 tmpNum = editText5.getSelectedItem().toString();
 
-                if(tmpType.isEmpty() || tmpLocation.isEmpty() ||tmpDirection.isEmpty() || tmpHeight.isEmpty() || tmpNum.isEmpty()){
+                if(tmpType.isEmpty() || tmpLocation.isEmpty() ||tmpDirection.isEmpty() || tmpHeight.isEmpty() || tmpNum.isEmpty() || timeInMills==null ){
                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                             context);
                     alertDialogBuilder.setMessage("ישנם שדות שאינם מלאים").setCancelable(false)
@@ -241,49 +235,76 @@ public class ReportDataActivity extends AppCompatActivity {
     }
 
 
+    public boolean checkLocationPermission() {
+        if (ContextCompat.checkSelfPermission(this,
+                android.Manifest.permission. ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
 
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        AlertDialog.Builder alertDialogBuilder1 = new AlertDialog.Builder(
-                context);
-        alertDialogBuilder1.setTitle("hi there!");
-        AlertDialog alertDialog1 = alertDialogBuilder1.create();
-        alertDialog1.show();
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    android.Manifest.permission. ACCESS_FINE_LOCATION)) {
+
+                // Show an explanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+                new AlertDialog.Builder(this)
+                        .setTitle("we need permissions")
+                        .setMessage("we realy need")
+                        .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                //Prompt the user once explanation has been shown
+                                ActivityCompat.requestPermissions(ReportDataActivity.this,
+                                        new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
+                                        MY_PERMISSIONS_REQUEST_LOCATION);
+                            }
+                        })
+                        .create()
+                        .show();
+
+
+            } else {
+                // No explanation needed, we can request the permission.
+                ActivityCompat.requestPermissions(this,
+                        new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION,android.Manifest.permission.ACCESS_COARSE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_LOCATION);
+            }
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
         switch (requestCode) {
-            case 1: {
+            case MY_PERMISSIONS_REQUEST_LOCATION: {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
+                    // permission was granted, yay! Do the
+                    // location-related task you need to do.
+                    if (ContextCompat.checkSelfPermission(this,
+                           android.Manifest.permission.ACCESS_FINE_LOCATION)
+                            == PackageManager.PERMISSION_GRANTED) {
+
+                        //Request location updates:
+
+                        mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 400, 1, (android.location.LocationListener) this);
+                    }
+
                 } else {
+
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
-                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                            context);
-                    alertDialogBuilder.setTitle("permission problem");
-                    //alertDialogBuilder.setMessage("nothing :)").setCancelable(true);
-                    AlertDialog alertDialog = alertDialogBuilder.create();
-                    alertDialog.show();
+
                 }
                 return;
             }
-            // other 'case' lines to check for other
-            // permissions this app might request
+
         }
     }
-//    private void permissionForAndroidM()
-//    {
-//        if (Build.VERSION.SDK_INT > 22) {
-//            String[] allPermissionNeeded = {
-//                    Manifest.permission.ACCESS_FINE_LOCATION,
-//                    Manifest.permission.ACCESS_COARSE_LOCATION};
-//
-//            List<String> permissionNeeded = new ArrayList<>();
-//            for (String permission : allPermissionNeeded)
-//                if (checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED)
-//                    permissionNeeded.add(permission);
-//            if (permissionNeeded.size() > 0) {
-//                requestPermissions(permissionNeeded.toArray(new String[0]), 0);
-//            }
-//        }
-//    }
+
 }
