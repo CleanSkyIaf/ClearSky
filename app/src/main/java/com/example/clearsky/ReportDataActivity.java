@@ -176,7 +176,7 @@ public class ReportDataActivity extends AppCompatActivity {
                 String tmpDirection;
                 long tmpDate;
                 String tmpNum;
-                String tmpHeight="100";
+                String tmpHeight;
 
 
                 Spinner editText1 = (Spinner) findViewById(R.id.spinner_bird_type);
@@ -190,35 +190,51 @@ public class ReportDataActivity extends AppCompatActivity {
                 tmpType = editText1.getSelectedItem().toString();
                 tmpLocation = editText2.getText().toString();
                 tmpDirection = editText3.getSelectedItem().toString();
+                tmpHeight = editText4.getText().toString();
                 tmpNum = editText5.getSelectedItem().toString();
-                ArrayList<String> array = new ArrayList<String>();
-                array.add("reports");
-                report = new Report(tmpType,tmpLocation,tmpDirection,timeInMills,tmpNum,User.getUserName(),tmpHeight);
-                DbProvider.writeValue(array,report);
 
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                        context);
-                TextView title = new TextView(context);
-                title.setText("שליחת דיווח");
-                title.setPadding(10, 10, 10, 10);
-                title.setGravity(Gravity.CENTER);
-                title.setTextSize(20);
+                if(tmpType.isEmpty() || tmpLocation.isEmpty() ||tmpDirection.isEmpty() || tmpHeight.isEmpty() || tmpNum.isEmpty()){
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                            context);
+                    alertDialogBuilder.setMessage("ישנם שדות שאינם מלאים").setCancelable(false)
+                            .setPositiveButton("אישור",new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog,int id) {
+                                    dialog.cancel();
+                                }
+                            });
+                    AlertDialog alertDialog = alertDialogBuilder.create();
+                    alertDialog.show();
+                }
+                else {
+                    ArrayList<String> array = new ArrayList<String>();
+                    array.add("reports");
+                    report = new Report(tmpType, tmpLocation, tmpDirection, timeInMills, tmpNum, User.getUserName(), tmpHeight);
+                    DbProvider.writeValue(array, report);
 
-                alertDialogBuilder.setCustomTitle(title);
-                alertDialogBuilder.setMessage("הדיווח נשלח בהצלחה").setCancelable(false)
-                        .setPositiveButton("אישור",new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,int id) {
-                                dialog.cancel();
-                                finish();
-                            }
-                        });
-                AlertDialog alertDialog = alertDialogBuilder.create();
-                alertDialog.show();
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                            context);
+                    TextView title = new TextView(context);
+                    title.setText("שליחת דיווח");
+                    title.setPadding(10, 10, 10, 10);
+                    title.setGravity(Gravity.CENTER);
+                    title.setTextSize(20);
+
+                    alertDialogBuilder.setCustomTitle(title);
+                    alertDialogBuilder.setMessage("הדיווח נשלח בהצלחה").setCancelable(false)
+                            .setPositiveButton("אישור", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                    finish();
+                                }
+                            });
+                    AlertDialog alertDialog = alertDialogBuilder.create();
+                    alertDialog.show();
 
 //                AlertDialog.Builder hiB = new AlertDialog.Builder(context);
 //                hiB.setTitle("sent successfully");
 //                //hiB.setMessage("go to sleep");
 //                hiB.create().show();
+                }
             }
         });
 
