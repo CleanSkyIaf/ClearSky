@@ -11,7 +11,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name= ".LoginPage">
+        <activity android:name=".UsersListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,7 +22,9 @@
  ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
         -->
-        <activity android:name=".MapsActivity"  android:label="@string/title_activity_maps" />
+        <activity
+            android:name=".MapsActivity"
+            android:label="@string/title_activity_maps" />
         <activity android:name=".ReportsView" />
 
         <!--
@@ -34,9 +36,8 @@
             android:value="@integer/google_play_services_version" />
 
         <activity android:name=".MainActivity" />
-
         <activity
-            android:name=".ChatRooms"
+            android:name=".LoginPage"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ChatRoom"
@@ -53,10 +54,8 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity
-            android:name=".ReportDataActivity">
-
-        </activity>
+        <activity android:name=".ReportDataActivity"></activity>
+        <activity android:name=".ChatRooms"></activity>
     </application>
 
 </manifest>
