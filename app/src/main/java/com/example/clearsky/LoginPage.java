@@ -48,7 +48,7 @@ public class LoginPage extends Activity {
 
                 ref.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
-                    public void onDataChange(DataSnapshot snapshot) {
+                    public void onDataChange(final DataSnapshot snapshot) {
                         final String userNameString = userName.getText().toString().trim();
                         final String passwordString = password.getText().toString();
 
@@ -62,6 +62,7 @@ public class LoginPage extends Activity {
                                             public void onClick(DialogInterface dialog, int id) {
                                                 //Set static user details
                                                 User.setUserName(userNameString);
+                                                User.set_isAdmin((Boolean)snapshot.child(userNameString).child("isAdmin").getValue());
 
                                                 LoginPage.this.finish();
                                                 Intent myIntent = new Intent(LoginPage.this, MainActivity.class);
@@ -152,23 +153,18 @@ public class LoginPage extends Activity {
 
                                     AlertDialog alertDialog = alertDialogBuilder.create();
                                     alertDialog.show();
-
                                 }
                                 else {
 
                                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                                             context);
                                     alertDialogBuilder.setTitle("הרשמה");
-                                    alertDialogBuilder.setMessage("נרשמת בהצלחה").setCancelable(false)
+                                    alertDialogBuilder.setMessage("נרשמת בהצלחה, אנא המתן לאישור המשתמש").setCancelable(false)
                                             .setPositiveButton("אישור", new DialogInterface.OnClickListener() {
                                                 public void onClick(DialogInterface dialog, int id) {
 
                                                     String firstNameString = newUserFirstName.getText().toString();
                                                     String lastNameString = newUserLastName.getText().toString();
-
-                                                    User.setUserName(userNameString);
-                                                    User.set_firstName(firstNameString);
-                                                    User.set_isAdmin(false);
 
                                                     ref.child(userNameString).setValue( new newUser(
                                                             userNameString,
@@ -177,8 +173,6 @@ public class LoginPage extends Activity {
                                                             lastNameString));
 
                                                     LoginPage.this.finish();
-                                                    Intent myIntent = new Intent(LoginPage.this, MainActivity.class);
-                                                    LoginPage.this.startActivity(myIntent);
                                                 }
                                             });
                                     AlertDialog alertDialog = alertDialogBuilder.create();

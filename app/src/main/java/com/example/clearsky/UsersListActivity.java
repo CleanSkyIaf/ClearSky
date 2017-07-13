@@ -50,17 +50,17 @@ public class UsersListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Dialog signInDialog = new Dialog(context);
-                signInDialog.setContentView(R.layout.dialog_user_details);
-                signInDialog.setTitle("פרטי משתמש");
+                Dialog userDetailsDialog = new Dialog(context);
+                userDetailsDialog.setContentView(R.layout.dialog_user_details);
+                userDetailsDialog.setTitle("פרטי משתמש");
 
                 final String userNameChose = (String) parent.getItemAtPosition(position);
 
-                final TextView userFirstName = (TextView)signInDialog.findViewById(R.id.firstNameUserDetailsText);
-                final TextView userLastName = (TextView)signInDialog.findViewById(R.id.lastNameUserDetailsText);
-                final TextView userUserName = (TextView)signInDialog.findViewById(R.id.userNameUserDetailsText);
-                Button deleteUserButton = (Button)signInDialog.findViewById(R.id.deleteUserButton);
-                final Button acceptUserButton = (Button)signInDialog.findViewById(R.id.acceptUserButton);
+                final TextView userFirstName = (TextView)userDetailsDialog.findViewById(R.id.firstNameUserDetailsText);
+                final TextView userLastName = (TextView)userDetailsDialog.findViewById(R.id.lastNameUserDetailsText);
+                final TextView userUserName = (TextView)userDetailsDialog.findViewById(R.id.userNameUserDetailsText);
+                Button deleteUserButton = (Button)userDetailsDialog.findViewById(R.id.deleteUserButton);
+                final Button acceptUserButton = (Button)userDetailsDialog.findViewById(R.id.acceptUserButton);
 
                 DatabaseReference myFirebaseRef = DbProvider.getRef();
                 final DatabaseReference ref;
@@ -78,8 +78,6 @@ public class UsersListActivity extends AppCompatActivity {
                         userFirstName.setText(userNameDetails.child("firstName").getValue().toString());
                         userLastName.setText(userNameDetails.child("lastName").getValue().toString());
                         userUserName.setText(userNameChose);
-
-
                     }
                     public void onCancelled(DatabaseError arg0) {
                         // TODO Auto-generated method stub
@@ -109,6 +107,10 @@ public class UsersListActivity extends AppCompatActivity {
                                         .setPositiveButton("אישור",new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog,int id) {
                                                 dialog.cancel();
+
+                                                UsersListActivity.this.finish();
+                                                Intent myIntent = new Intent(UsersListActivity.this, MainActivity.class);
+                                                UsersListActivity.this.startActivity(myIntent);
                                             }
                                         });
 
@@ -145,6 +147,10 @@ public class UsersListActivity extends AppCompatActivity {
                                         .setPositiveButton("אישור",new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog,int id) {
                                                 dialog.cancel();
+
+                                                UsersListActivity.this.finish();
+                                                Intent myIntent = new Intent(UsersListActivity.this, MainActivity.class);
+                                                UsersListActivity.this.startActivity(myIntent);
                                             }
                                         });
                                 AlertDialog alertDialog = alertDialogBuilder.create();
@@ -158,7 +164,7 @@ public class UsersListActivity extends AppCompatActivity {
                     }
                 });
 
-                signInDialog.show();
+                userDetailsDialog.show();
             }
         });
     }

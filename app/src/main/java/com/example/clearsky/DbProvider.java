@@ -96,7 +96,12 @@ public class DbProvider {
                 ArrayList<String> tempUsers = new ArrayList<>();
 
                 for (DataSnapshot postSnapshot: dataSnapshot.child("users").getChildren()) {
-                    tempUsers.add(postSnapshot.child("userName").getValue().toString());
+
+                    String currUserName = postSnapshot.child("userName").getValue().toString();
+
+                    if (!currUserName.equals(User.getUserName())) {
+                        tempUsers.add(currUserName);
+                    }
                 }
 
                 for (String user : tempUsers) {

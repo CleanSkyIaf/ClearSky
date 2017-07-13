@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         insertButton=(Button)findViewById(R.id.newreport) ;
         infoButton=(Button)findViewById(R.id.watchreport) ;
         chatButton=(Button)findViewById(R.id.chat) ;
