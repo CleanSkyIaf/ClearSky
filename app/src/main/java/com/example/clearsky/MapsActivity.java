@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -60,11 +59,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         readReportData();
 
-        // Add a marker in Sydney and move the camera
-        LatLng jerusalam = new LatLng(31.762583, 35.193586); //jerusalam
-        mMap.addMarker(new MarkerOptions().position(jerusalam).title("Marker in jerusalam"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(jerusalam, 8));
-
         mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
             @Override
             public View getInfoWindow(Marker marker) {
@@ -104,6 +98,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 birdPlace.setText("מיקום: " + currReport.getBirdPlace());
                 birdPlace.setBackgroundColor(Color.WHITE);
 
+                TextView height = new TextView(context);
+                height.setTextColor(Color.GRAY);
+                height.setGravity(Gravity.CENTER);
+                height.setText("גובה: " + currReport.getHeight());
+                height.setBackgroundColor(Color.WHITE);
+
+                TextView reporter = new TextView(context);
+                reporter.setTextColor(Color.GRAY);
+                reporter.setGravity(Gravity.CENTER);
+                reporter.setText("מדווח: " + currReport.getReporter());
+                reporter.setBackgroundColor(Color.WHITE);
+
                 TextView date = new TextView(context);
                 date.setTextColor(Color.GRAY);
                 date.setGravity(Gravity.CENTER);
@@ -116,6 +122,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 info.addView(birdCount);
                 info.addView(birdKind);
                 info.addView(birdPlace);
+                info.addView(height);
+                info.addView(reporter);
                 info.addView(date);
 
                 return info;

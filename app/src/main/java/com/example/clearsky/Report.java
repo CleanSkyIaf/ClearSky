@@ -1,8 +1,5 @@
 package com.example.clearsky;
 
-import android.util.Log;
-import android.widget.Spinner;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -90,15 +87,15 @@ public class Report {
     }
 
     public void addToList(ArrayList<String> lst) {
-        lst.add(this.birdKind.substring(0, 5));
-        lst.add(this.birdPlace.substring(0, 5));
-        lst.add(this.birdAzimuth.substring(0, 5));
+        lst.add(this.birdKind);
+        lst.add(this.birdPlace);
+        lst.add(this.birdAzimuth);
 
         Calendar.getInstance().setTimeInMillis(this.date);
         lst.add(new SimpleDateFormat("HH:mm").format(Calendar.getInstance().getTime()));
 
-        lst.add(this.birdCount.substring(0, 5));
-        lst.add(this.reporter.substring(0, 5));
-        lst.add(this.height.substring(0, 5));
+        lst.add(this.birdCount);
+        lst.add(this.height);
+        lst.add(this.reporter);
     }
 }

@@ -1,10 +1,7 @@
 package com.example.clearsky;
 
-import android.content.Context;
-import android.graphics.Color;
 import android.util.Log;
 import android.widget.ArrayAdapter;
-import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -69,6 +66,8 @@ public class DbProvider {
                 reports.add("כיוון");
                 reports.add("תאריך");
                 reports.add("כמות");
+                reports.add("גובה");
+                reports.add("מדווח");
 
                 for (Report report : tempReports) {
                    report.addToList(reports);

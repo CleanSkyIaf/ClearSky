@@ -17,12 +17,14 @@
         android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
-        android:text="Chat"
+        android:text="צ'ט"
         android:layout_below="@+id/watchreport"
         android:layout_alignRight="@+id/watchreport"
         android:layout_alignEnd="@+id/watchreport"
         android:layout_alignLeft="@+id/watchreport"
-        android:layout_alignStart="@+id/watchreport" />
+        android:layout_alignStart="@+id/watchreport"
+        android:background="@color/colorPrimaryDark"
+        tools:text="צ'ט" />
 
     <Button
         android:id="@+id/map"
@@ -31,33 +33,38 @@
         android:layout_alignBaseline="@+id/chat"
         android:layout_alignBottom="@+id/chat"
         android:layout_alignLeft="@+id/newreport"
-        android:text="MAP"
+        android:text="מפת דיווחים"
         android:layout_alignRight="@+id/newreport"
-        android:layout_alignEnd="@+id/newreport" />
+        android:layout_alignEnd="@+id/newreport"
+        android:background="@color/colorPrimaryDark"
+        tools:text="מפת דיווחים"
+        style="@android:style/Widget.Button" />
 
     <Button
-        android:text="watch report"
+        android:text="רשימת דיווחים"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:id="@+id/watchreport"
-        tools:text="watch report"
+        tools:text="רשימת דיווחים"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp" />
+        android:layout_marginStart="16dp"
+        android:background="@color/colorPrimaryDark" />
 
     <Button
         android:id="@+id/newreport"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:text="new report"
-        tools:text="new report"
+        android:text="הוספת דיווח"
+        tools:text="הוספת דיווח"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_marginRight="24dp"
-        android:layout_marginEnd="24dp" />
+        android:layout_marginEnd="24dp"
+        android:background="@color/colorPrimaryDark" />
 
     <Button
         android:id="@+id/manageUsersbutton"
